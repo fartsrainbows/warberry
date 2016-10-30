@@ -161,7 +161,7 @@ def robots_txt():
                                         try:
                                                 subprocess32.call("sudo curl -s --user-agent anagent %s:%s/robots.txt >> ../Results/robots.txt" % (host.strip(), port), shell=True, timeout=5)
                                         except subprocess32.TimeoutExpired:
-                                                print bcolors.WARNING + "[!] Timed out, moving along.\n" + bcolors.ENDC
+                                                print bcolors.WARNING + "[!] Timed out, moving along." + bcolors.ENDC
 
                 print bcolors.TITLE + "[+] Done! Results saved in /Results/robotstxt" + bcolors.ENDC
 
