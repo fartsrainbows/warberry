@@ -13,6 +13,10 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
 
+<<<<<<< HEAD
+=======
+import subprocess
+>>>>>>> upstream/master
 import subprocess32
 import os, os.path
 import sys, getopt
@@ -155,12 +159,20 @@ def robots_txt():
 
                 with open('../Results/web_hosts') as webs:
                         for host in webs:
+<<<<<<< HEAD
 				ports_to_check = [80, 8080, 4443, 8081, 443, 8181, 9090]
                                 for port in ports_to_check:
                                         print "[*] Enumerating Robots TXT on %s:%s" % (host.strip(), port)
                                         print "Attempting Port %s" % port
                                         try:
                                                 subprocess32.call("sudo curl -s --user-agent anagent %s:%s/robots.txt >> ../Results/robots.txt" % (host.strip(), port), shell = True, timeout=5)
+=======
+                                ports_to_check = [80, 8080, 4443, 8081, 443, 8181, 9090]
+                                for port in ports_to_check:
+                                        print bcolors.WARNING + "[*]" + bcolors.ENDC + " Enumerating Robots TXT on %s:%s" % (host.strip(), port)
+                                        try:
+                                                subprocess32.call("sudo curl -s --user-agent anagent %s:%s/robots.txt >> ../Results/robots.txt" % (host.strip(), port), shell=True, timeout=5)
+>>>>>>> upstream/master
                                         except subprocess32.TimeoutExpired:
                                                 print bcolors.WARNING + "[!] Timed out, moving along.\n" + bcolors.ENDC
 
