@@ -224,6 +224,9 @@ v4.0                              @sec_groundzero
                         os_enum(CIDR,iface)
                         with open('../Results/running_status', 'a') as status:
                             status.write("Completed OS Enumeration\n")
+                        heartbleed_check()
+                        with open('../Results/running_stats', 'a') as status:
+                            status.write("Completed Heartbleed Enumeration\n")    
                         #enum4linux()
                         #with open('../Results/running_status', 'a') as status:
                         #    status.write("Completed enum4linux Enumeration\n")
