@@ -386,4 +386,16 @@ def aggressive_vpn():
                                 vpn_aggressive.write(vpn)
         print bcolors.TITLE + "[+] Done! Results saved in /Results/vpn_aggressive" + bcolors.ENDC
 
-
+def heartbleed_check():
+        if os.path.isfile('../Results/webservers443'):
+                print " "
+                print bcolors.OKGREEN + "      [ HEARTBLEED CHECK MODULE ]\n" + bcolors.ENDC
+        else:
+                return
+        if os.path.isfile('../Results/webservers443'):
+                print bcolors.WARNING + "[!] HeartBleed Results File Exists. Previous Results will be Overwritten\n " + bcolors.ENDC
+        with open('../Results/webservers443') as webservers:
+                for webserver in webservers:
+                        print "[*] Check %s for Heartbleed bug" % webserver.strip()
+                        subprocess32.call('echo "QUIT"|openssl s_client -connect {0}:443 2>&1 | grep "server extension "heartbeat" (id=15)" || echo "{1} safe" >> ../Results/heartbleed_results'.format(webserver.strip(),webserver.strip()), shell=True)
+        print bcolors.TITLE + "[+] Done! Results saved in /Results/heartbleed_results" + bcolors.ENDC
