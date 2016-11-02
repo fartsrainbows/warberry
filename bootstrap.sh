@@ -35,7 +35,7 @@ apt-get install smbclient -y
 apt-get install samba -y
 apt-get install samba_common_bin -y
 apt-get install unzip -y
-
+apt-get install libpcap-dev -y
 
 pip install optparse-pretty 
 pip install netaddr 
