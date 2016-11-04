@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+# usage: sudo bash warberry/bootstrap.sh
+
 if [ "$(id -u)" != "0" ]; then
 	echo "ERROR: Sorry, you are not root. Run this script as root or with sudo."
 	exit 1
@@ -6,13 +9,12 @@ fi
 echo """
         Creating necessary directories...
     """
-
-cd ..
-mkdir WarBerry
-mv warberry/ WarBerry/
-cd WarBerry/
-mkdir Results
-mkdir Tools
+    mkdir WarBerry
+    mv warberry/ WarBerry/
+    cd WarBerry
+    mkdir Results
+    mkdir Tools
+    root_dir=$(pwd)
 
 echo """
         Updating Distro...
@@ -51,13 +53,13 @@ apt-get install netdiscover -y
 apt-get install macchanger -y
 
 wget http://seclists.org/nmap-dev/2016/q2/att-201/clamav-exec.nse -O /usr/share/nmap/scripts/clamav-exec.nse
-wget https://labs.portcullis.co.uk/download/enum4linux-0.8.9.tar.gz -O /home/pi/WarBerry/Tools/
+wget https://labs.portcullis.co.uk/download/enum4linux-0.8.9.tar.gz -O $root_dir/Tools/
 tar -zxvf enum4linux-0.8.9.tar.gz
 mv enum4linux-0.8.9 enum4linux
 
 
 
-cd /home/pi/WarBerry/Tools
+cd $root_dir/Tools
 
 
 echo """
