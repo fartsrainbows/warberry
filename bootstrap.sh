@@ -37,15 +37,10 @@ apt-get install smbclient -y
 apt-get install samba -y
 apt-get install samba_common_bin -y
 apt-get install unzip -y
-<<<<<<< HEAD
-apt-get install libpcap-dev -y
-=======
 sudo apt-get install python-dev
 sudo apt-get install python3-dev
 
->>>>>>> a50727344f85de1c1fad3bf3865a3cab7d0db0c2
-
-pip install optparse-pretty 
+pip install optparse-pretty
 pip install netaddr 
 pip install ipaddress 
 pip install subprocess32
