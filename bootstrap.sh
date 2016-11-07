@@ -26,7 +26,7 @@ echo """
         Installing necessary tools from apt
     """
 apt_app_list="nbtscan python-scapy tcpdump nmap python-nmap python-bluez \
-              smbclient samba unzip python-dev python3-dev \
+              smbclient samba unzip python-dev python3-dev screen\
               libpcap-dev ppp xprobe2 sg3-utils netdiscover macchanger onesixtyone \
               nikto hydra john bridge-utils w3af-console ettercap-text-only cryptcat \
               ike-scan"
