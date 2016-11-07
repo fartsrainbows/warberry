@@ -146,15 +146,19 @@ def hostnames(CIDR):
 	else:
 		print bcolors.WARNING + "No Live IPs were found."
 		return
-	try:
+	if os.path.isfile('../Results/live_ips'):
 		with open('../Results/live_ips', 'r') as active_ips:
 			for active_ip in active_ips:
-				name, alias, ipaddress = socket.gethostbyaddr(active_ip)
-				print bcolors.OKGREEN + "[+] Found Hostname: %s %s" % (active_ip.strip(), name.strip()) + bcolors.ENDC
-				f = open('../Results/hostnames', 'a')
-				f.write(name)
-				f.close()
-	except:
+				try:
+					print "checking hostname for IP %s" % active_ip.strip()
+					name, alias, ipaddress = socket.gethostbyaddr(active_ip)
+					print bcolors.OKGREEN + "[+] Found Hostname: %s %s" % (active_ip.strip(), name.strip()) + bcolors.ENDC
+					f = open('../Results/hostnames', 'a')
+					f.write(active_ip.strip() + " " + name + "\n")
+					f.close()
+				except socket.herror:
+					print "Cannot find hostname for %s" % active_ip.strip()
+	else:
 		print bcolors.FAIL + "No Hostnames Found" + bcolors.ENDC
 	print " "
 
