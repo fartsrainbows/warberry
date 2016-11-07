@@ -140,24 +140,23 @@ def set_static(CIDR, ifname):
 
 
 def hostnames(CIDR):
-	print bcolors.OKGREEN + "      [ HOSTNAMES ENUMERATION MODULE ]\n" + bcolors.ENDC
-	hostname = socket.gethostname()
-	print "Current Hostname:" + bcolors.TITLE + " %s" %hostname + bcolors.ENDC
-	print " "
-
-	print "Searching for hostnames in %s\n" %CIDR
+	if os.path.isfile('../Results/live_ips'):
+		print bcolors.OKGREEN + "      [ HOSTNAMES ENUMERATION MODULE ]\n" + bcolors.ENDC
+		print "Searching for hostnames in %s\n" % CIDR
+	else:
+		print bcolors.WARNING + "No Live IPs were found."
+		return
 	try:
-		subprocess.call('sudo nbtscan -q %s | egrep "^[^A-Z]*[A-Z]{5,15}[^A-Z]*$" | awk {\'print $2\'} > ../Results/hostnames' %CIDR, shell = True)
-		subprocess.call("sudo sort ../Results/hostnames | uniq > ../Results/unique_hosts", shell = True)
-		with open('../Results/unique_hosts', 'r') as hostnames:
-			hosts = hostnames.readlines()
-			for host in hosts:
-				print bcolors.OKGREEN + "[+] Found Hostname: %s" %host.strip() + bcolors.ENDC
-
+		with open('../Results/live_ips', 'r') as active_ips:
+			for active_ip in active_ips:
+				name, alias, ipaddress = socket.gethostbyaddr(active_ip)
+				print bcolors.OKGREEN + "[+] Found Hostname: %s %s" % (active_ip.strip(), name.strip()) + bcolors.ENDC
+				f = open('../Results/hostnames', 'a')
+				f.write(name)
+				f.close()
 	except:
 		print bcolors.FAIL + "No Hostnames Found" + bcolors.ENDC
 	print " "
-
 
 def manual_namechange(host_name):
 
